@@ -13,22 +13,25 @@ int main(int argc, char const *argv[]) {
     char chain[100];
     unsigned char raster[1921][1081][3];
     int vertex[15000][2],polygon[15000][3];
-    int scale,nVertex=0,nPolygon=0,v=0,p=0,angle=90;
+    int scale,nVertex=0,nPolygon=0,v=0,p=0,angle=atoi(argv[2]);
     scale = atoi(argv[1]);
-    obj = fopen(argv[2],"r");
+    obj = fopen(argv[3],"r");
 	double radians = (angle * PI)/180;
-	
+
     while(fgets(chain,100,obj)){
         if(chain[0] == 'v'){
-			float x = atof(strtok(chain+2," "))+7.0;
-			float y = atof(strtok(chain+11," "))+1.3;
-			
+
+			float x = atof(strtok(chain+2," "));
+			float y = atof(strtok(NULL," "));
+            //printf("Vertex: %f , %f \n",x,y);
 			//vertex[v][0] = (int)(x*scale)+500;
             //vertex[v][1] = (int)(y*scale)-200;
 
-            vertex[v][0] = (int)((x*cos(radians)-y*sin(radians))*scale);
-            vertex[v][1] = (int)((x*sin(radians)+y*cos(radians))*scale);
-			
+            vertex[v][0] =960 + (int)((x*cos(radians)-y*sin(radians))*scale);
+            vertex[v][1] =540 + (int)((x*sin(radians)+y*cos(radians))*scale);
+            //printf("Scaled: %d , %d \n",vertex[v][0],vertex[v][1]);
+
+
 			//vertex[v][2] = (int)(atof(strtok(NULL,"\n"))*scale);
             nVertex++;
             v++;

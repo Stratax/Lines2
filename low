@@ -1,0 +1,39 @@
+#!/bin/bash
+for i in `seq 1 360`;
+do
+    ./rotate $1 $i $2 > img/$i.ppm;
+    echo $i done
+done
+
+list=(img/{1..30}.ppm)
+convert -verbose -delay 10 ${list[*]} mv.gif
+list1=(img/{31..60}.ppm)
+convert -verbose -delay 10 ${list1[*]} mv1.gif
+list=(img/{61..90}.ppm)
+convert -verbose -delay 10 ${list[*]} mv2.gif
+list1=(img/{91..120}.ppm)
+convert -verbose -delay 10 ${list1[*]} mv3.gif
+list=(img/{121..150}.ppm)
+convert -verbose -delay 10 ${list[*]} mv4.gif
+list1=(img/{151..180}.ppm)
+convert -verbose -delay 10 ${list1[*]} mv5.gif
+list=(img/{181..210}.ppm)
+convert -verbose -delay 10 ${list[*]} mv6.gif
+list1=(img/{211..240}.ppm)
+convert -verbose -delay 10 ${list1[*]} mv7.gif
+list=(img/{241..270}.ppm)
+convert -verbose -delay 10 ${list[*]} mv8.gif
+list1=(img/{271..300}.ppm)
+convert -verbose -delay 10 ${list1[*]} mv9.gif
+list=(img/{301..330}.ppm)
+convert -verbose -delay 10 ${list[*]} mv10.gif
+list1=(img/{331..360}.ppm)
+convert -verbose -delay 10 ${list1[*]} mv11.gif
+
+convert -verbose mv.gif mv1.gif -adjoin master.gif
+convert -verbose mv2.gif mv3.gif -adjoin master1.gif
+convert -verbose mv4.gif mv5.gif -adjoin master2.gif
+convert -verbose mv6.gif mv7.gif -adjoin master3.gif
+convert -verbose mv8.gif mv9.gif -adjoin master4.gif
+convert -verbose mv10.gif mv11.gif -adjoin master5.gif
+rm mv*gif
